@@ -84,11 +84,35 @@ app.get('/register', (request, response) => {
 
 // register post method
 app.post('/register', (request, response) => {
+ //    console.log(request.body);
+ //    let newUser = request.body;
+ //    const { usernamename, email, password } = request.body;
+
+ //    let hashedPassword = sha256(newUser.password + SALT);
+ //    const queryString = `INSERT INTO users (usernamename, email, password) VALUES('${usernamename}','${email}','${password}') RETURNING *`;;
+ // const values = [
+ //        newUser.username,
+ //        newUser.email,
+ //        hashedPassword
+ //    ];
+    // const queryString = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
+
+    // const values = [
+    //     newUser.name,
+    //     newUser.email,
+    //     hashedPassword
+    // ];
     console.log(request.body);
     let newUser = request.body;
-    const { usernamename, email, password } = userRegistrationInfo;
     let hashedPassword = sha256(newUser.password + SALT);
-    const queryString = `INSERT INTO users (usernamename, email, password) VALUES('${usernamename}','${email}','${password}') RETURNING *`;;
+
+    const queryString = 'INSERT INTO users (username, email, password) VALUES ($1, $2, $3) RETURNING *';
+
+    const values = [
+        newUser.username,
+        newUser.email,
+        hashedPassword
+    ];
 
     pool.query(queryString, values, (err, queryRes) => {
 
@@ -101,6 +125,7 @@ app.post('/register', (request, response) => {
             console.log('query result:', queryRes);
             response.cookie('loggedin', hashedCookie)
             response.cookie('user_id', userID)
+
             response.render('login');
         }
     });
@@ -138,6 +163,7 @@ app.post('/login', (request, response) => {
                     let hashedCookie = sha256(SALT + user_id);
                     response.cookie('user_id', user_id);
                     response.cookie('hasLoggedIn', hashedCookie);
+                    console.log('logged in as ' + user_id);
                     // if it matches they have been verified, log them in
                     //after login redirect to posts page
                     response.redirect('/posts/', 302);
@@ -171,29 +197,26 @@ app.get('/posts/', (request, response) => {
 app.get('/posts/new', (request, response) => {
     // respond with HTML page with form to create new post
     response.render('addNewPostForm');
+    console.log("getting the new data");
 });
 
 //insert into post
-app.post('/posts', (request, response) => {
-    let { title, img, ingredients, area, address, content, expiry_date, time_posted } = request.body;
-    queryText = `INSERT INTO posts (title, img, ingredients, area, address, content, expiry_date, time_posted) VALUES ('${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}', ${time_posted}) RETURNING *`
-    pool.query(queryText, (err, queryRes) => {
-        console.log(queryRes.rows[0])
-        response.render('showNewPost', queryRes.rows[0]);
-    })
-})
+app.post('/posts',(request, response)=>{
+    let { giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
+    queryText = `INSERT INTO posts ( title, img, ingredients, area, address, content, expiry_date) VALUES ( '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
+    pool.query(queryText,(err,queryRes)=>{
+        response.render('showSinglePost',queryRes.rows[0]);
+    });
+});
+
 
 //show single post
-app.get('/posts/:id', (request, response) => {
-    const queryText = "SELECT * FROM posts";
-    pool.query(queryText, (err, queryRes) => {
-        console.log(queryRes);
-        const postsDB = queryRes.rows; //the array of objects from the database
-        const data = {
-            posts: postsDB
-        };
-        response.render('showSinglePost', data);
-    })
+app.get('/posts/:id',(request,response)=>{
+    let {id} = request.params;
+    queryText = `SELECT * FROM posts WHERE id=${id}`;
+    pool.query(queryText,(err,queryRes)=>{
+        response.render('showSinglePost',queryRes.rows[0]);
+    });
 });
 
 
@@ -203,7 +226,7 @@ app.put('/posts/:id', (request, response) => {
     let { title, photo_url, ingredients } = request.body;
     const queryText = `UPDATE posts SET title='${title}', img='${photo_url}', ingredients='${ingredients}', area='${area}', address='${address}', content='${content}', expiry_date='${expiry_date}', time_posted=${time_posted}WHERE id=${id} RETURNING *`;
     pool.query(queryText, (err, queryRes) => {
-        response.render('show', queryRes.rows[0]);
+        response.render('showSinglePost', queryRes.rows[0]);
     });
 });
 
@@ -226,6 +249,19 @@ app.delete('/posts/:id', (request, result) => {
 // their user id
 // Redirect them to the home page.
 
+
+//figure out how this will work?
+app.get('/pendingRequest/new', (request, response) => {
+    //landing page display register form
+    // response.render('pendingRequest');
+    response.render('pendingRequest');
+});
+
+app.post('/pendingRequest', (request, response) => {
+    response.render('pendingRequest');
+    //update table with receiver id
+    //redirect to same page
+})
 
 /**
  * ===================================
