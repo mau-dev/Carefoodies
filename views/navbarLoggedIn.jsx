@@ -1,8 +1,9 @@
 var React = require("react");
 
 
-class Navbar extends React.Component {
+class NavbarLogedIn extends React.Component {
     render() {
+        let {username} = this.props;
         return (
            <html>
                 <head>
@@ -20,17 +21,17 @@ class Navbar extends React.Component {
                             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                                 <ul className="nav mr-auto mt-lg-0">
                                     <li className="nav-item">
-                                        <a className="nav-link" style={{ color: '#CC46E0'}} href="http://localhost:3000/posts/"></a>
+                                        <a className="nav-link" style={{ color: '#CC46E0'}} href="http://localhost:3000/posts/">Home</a>
                                     </li>
                                     <li className="nav-item">
-                                        <a className="nav-link" style={{ color: '#CC46E0'}} href="http://localhost:3000/posts/new"></a>
+                                        <a className="nav-link" style={{ color: '#CC46E0'}} href="http://localhost:3000/posts/new">About Us</a>
                                     </li>
                                  </ul>
-                                <form className="form-inline my-2 my-lg-0" method="GET" action={"/login"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Log In" style={{ border: '1px solid #CC46E0', color: '#CC46E0', borderRadius: '8px'}}/>
-                                </form>
-                                <form className="form-inline my-2 my-lg-0" method="GET" action={"/register"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Register" style={{ marginLeft: '20px', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                {username}
+                               <span className="icon" href="http://localhost:3000/posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><img src="http://localhost:3000/images/profile-icon.png" style={{ height: '30px'}}/></span>
+
+                                <form className="form-inline my-2 my-lg-0" method="GET" action={"/posts/new"}>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Post Food" style={{ marginLeft: '20px', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
                                 </form>
                             </div>
                         </nav>
@@ -44,4 +45,4 @@ class Navbar extends React.Component {
     };
 };
 
-module.exports = Navbar;
+module.exports = NavbarLogedIn;

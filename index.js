@@ -82,26 +82,11 @@ app.get('/register', (request, response) => {
 
 });
 
+
+
 // register post method
 app.post('/register', (request, response) => {
- //    console.log(request.body);
- //    let newUser = request.body;
- //    const { usernamename, email, password } = request.body;
 
- //    let hashedPassword = sha256(newUser.password + SALT);
- //    const queryString = `INSERT INTO users (usernamename, email, password) VALUES('${usernamename}','${email}','${password}') RETURNING *`;;
- // const values = [
- //        newUser.username,
- //        newUser.email,
- //        hashedPassword
- //    ];
-    // const queryString = 'INSERT INTO users (name, email, password) VALUES ($1, $2, $3) RETURNING *';
-
-    // const values = [
-    //     newUser.name,
-    //     newUser.email,
-    //     hashedPassword
-    // ];
     console.log(request.body);
     let newUser = request.body;
     let hashedPassword = sha256(newUser.password + SALT);
@@ -137,6 +122,8 @@ app.get('/login', (request, response) => {
     response.render('login')
 });
 
+var currentUser;
+
 //login post method
 app.post('/login', (request, response) => {
     let newUser = request.body;
@@ -160,10 +147,19 @@ app.post('/login', (request, response) => {
                 //or hashedRequestPassword === requestPassword ?
                 if (hashedRequestPassword === result.rows[0].password) {
                     let user_id = result.rows[0].id
+                    console.log(result.rows[0].username);
+                    let user_username = result.rows[0].username;
+
                     let hashedCookie = sha256(SALT + user_id);
+
+
                     response.cookie('user_id', user_id);
+                    response.cookie('user_username', user_username);
                     response.cookie('hasLoggedIn', hashedCookie);
-                    console.log('logged in as ' + user_id);
+                    console.log('user id logged in as ' + user_id);
+                  //not working
+                   const currentUser = request.cookies['user_username'];
+                   console.log('this is currentUser from inside ' + currentUser);
                     // if it matches they have been verified, log them in
                     //after login redirect to posts page
                     response.redirect('/posts/', 302);
@@ -176,6 +172,9 @@ app.post('/login', (request, response) => {
         }
     });
 });
+
+
+console.log('this is currentUser ' + currentUser);
 
 //see all posts page
 app.get('/posts/', (request, response) => {
@@ -202,10 +201,19 @@ app.get('/posts/new', (request, response) => {
 
 //insert into post
 app.post('/posts',(request, response)=>{
-    let { giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
-    queryText = `INSERT INTO posts ( title, img, ingredients, area, address, content, expiry_date) VALUES ( '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
+    // request.cookie('user_username', user_username);
+     const currentUser = request.cookies['user_username'];
+     const currentUserId = request.cookies['user_id'];
+
+
+    //get current user id
+    //set the giver_id of the post as current user id
+    let giver_id = currentUserId;
+
+    let { receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
+    queryText = `INSERT INTO posts ( giver_id, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}, ${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
     pool.query(queryText,(err,queryRes)=>{
-        response.render('showSinglePost',queryRes.rows[0]);
+        response.render('showNewPost',queryRes.rows[0]);
     });
 });
 
@@ -231,11 +239,11 @@ app.put('/posts/:id', (request, response) => {
 });
 
 //delete post
-app.delete('/posts/:id', (request, result) => {
+app.delete('/posts/:id', (request, response) => {
     let { id } = request.params;
     const queryText = `DELETE FROM posts WHERE id=${id}`;
     pool.query(queryText, (err, queryRes) => {
-        response.render('home');
+        response.render('index');
     });
 });
 
@@ -252,15 +260,31 @@ app.delete('/posts/:id', (request, result) => {
 
 //figure out how this will work?
 app.get('/pendingRequest/new', (request, response) => {
-    //landing page display register form
-    // response.render('pendingRequest');
-    response.render('pendingRequest');
+    //  const currentUser = request.cookies['user_username'];
+    // //landing page display register form
+    // // response.render('pendingRequest');
+    // response.cookie('user_username', user_username);
+    // response.send(currentUser);
+    // // response.render('pendingRequest');
 });
 
 app.post('/pendingRequest', (request, response) => {
-    response.render('pendingRequest');
+
+
+   const currentUser = request.cookies['user_username'];
+    // response.render('pendingRequest');
     //update table with receiver id
     //redirect to same page
+    //if current user === giver_id user hide request button
+    //if receiver id === null, show request button
+    // if receiver id not null, change button to pending
+ //    response.cookie('user_username', user_username)
+ //    //
+ response.send(currentUser)
+
+
+//set the receiver id of the post
+
 })
 
 /**

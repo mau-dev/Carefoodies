@@ -1,5 +1,6 @@
 const React = require('react');
 const Navbar = require('./navbar');
+const NavbarLogged = require('./navbarLoggedIn');
 
 class Layout extends React.Component {
     render() {
@@ -12,7 +13,7 @@ class Layout extends React.Component {
                 </head>
                 <body>
                     <div className="container-fluid" style={{ padding:'0'}}>
-                    <Navbar/>
+                    <NavbarLogged />
                         <main style={{  margin: '0 auto', fontFamily: 'Montserrat'}}>
                             {this.props.children}
                         </main>

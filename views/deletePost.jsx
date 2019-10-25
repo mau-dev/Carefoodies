@@ -1,4 +1,4 @@
-let React = require('react');
+const React = require('react');
 
 class Delete extends React.Component {
   render() {

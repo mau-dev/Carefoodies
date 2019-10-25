@@ -5,15 +5,20 @@ class Index extends React.Component {
 
   render() {
         const postsList = this.props.posts.map(item => {
-        let { title, img, ingredients, area, address, content, expiry_date, time_posted } = item;
+        let { giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date, time_posted  } = item;
 
   return (
             <div className="card col-md-3 float-left" style={{ margin: '50px 3%', maxWidth: '30%', borderRadius: '10px'}}>
-                <img height="300px" width="auto" src={item.img} className="card-img-top" style={{  padding: '15px 0'}}/>
-                <div className="card-bodys">
-                    <h5 className="card-title">{title}</h5>
+               <a href={"/posts/"+item.id}> <img height="300px" width="auto" src={item.img} href={"/posts/"+item.id} className="card-img-top" style={{  padding: '15px 0'}}/></a>
+                <div className="card-bodys" style={{  marginBottom: '20px'}}>
+                     <h5 className="card-title">{title}</h5>
                     <p className="card-text">{address}</p>
-                </div>
+                    <span style={{  float: 'right'}}>
+                             <form className=" request-food form-inline my-2" method="POST" action={"/pendingRequest"}>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                </form>
+                    </span>
+                 </div>
                 <div class="offset-md-1">
                 </div>
             </div>

@@ -7,10 +7,10 @@ CREATE TABLE users (
 
 CREATE TABLE posts (
 	id SERIAL PRIMARY KEY,
-	-- giver_id INTEGER,
-	-- receiver_id INTEGER,
-	-- pending_request BOOLEAN,
-	-- settled_request BOOLEAN,
+	giver_id INTEGER,
+	receiver_id INTEGER,
+	pending_request BOOLEAN,
+	settled_request BOOLEAN,
 	title TEXT,
 	img TEXT,
 	ingredients TEXT,
