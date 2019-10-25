@@ -18,6 +18,7 @@ class ShowNewPost extends React.Component {
                             <img src={img} className="img-fluid" style={{float: 'left', width: 'auto%', margin: ' 5px', height: '400px'}}/>
                                <div style={{float: 'right', width: '35%', height: 'auto', margin: ' 5px'}} >
                             <h1 >{title}</h1>
+                            <h1>posted by {giver_id} </h1>
                                 <p >{ingredients}</p>
                                 <p >{area}</p>
                                 <p >{address}</p>
