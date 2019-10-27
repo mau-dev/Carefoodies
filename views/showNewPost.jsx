@@ -6,6 +6,8 @@ const NavbarLogged = require('./navbarLoggedIn');
 class ShowNewPost extends React.Component {
     render() {
 // grab and destructure object
+
+
         let {id, giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
             return (
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>

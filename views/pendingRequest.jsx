@@ -9,7 +9,7 @@ class Home extends React.Component {
         <head>
         </head>
         <body>
-         <h1 style={{width: '100%', margin: '20% auto', textAlign: 'center', fontFamily: 'Montserrat'}}>Hello World!</h1>
+         <h1 style={{width: '100%', margin: '20% auto', textAlign: 'center', fontFamily: 'Montserrat'}}> Requested by {this.props.currentUser}</h1>
         </body>
       </html>
     );

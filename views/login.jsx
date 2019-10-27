@@ -34,7 +34,8 @@ class Login extends React.Component {
   </div>
 
 </div>
-                    </div>                    <div style={{backgroundColor: '#F7F7F5', width: '50vw', height: '100%', display: 'block', margin: '0 ', padding: '10% ', float: 'right'}}>
+                    </div>
+                                        <div style={{backgroundColor: '#F7F7F5', width: '50vw', height: '100%', display: 'block', margin: '0 ', padding: '10% ', float: 'right'}}>
                         <LoginForm /> {this.props.children}
                     </div>
                 </main>

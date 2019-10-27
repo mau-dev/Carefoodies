@@ -150,11 +150,13 @@ app.post('/login', (request, response) => {
                     console.log(result.rows[0].username);
                     let user_username = result.rows[0].username;
 
+
                     let hashedCookie = sha256(SALT + user_id);
 
 
                     response.cookie('user_id', user_id);
                     response.cookie('user_username', user_username);
+
                     response.cookie('hasLoggedIn', hashedCookie);
                     console.log('user id logged in as ' + user_id);
                   //not working
@@ -181,8 +183,10 @@ app.get('/posts/', (request, response) => {
     const queryText = "SELECT * FROM posts";
     pool.query(queryText, (err, queryRes) => {
         const postsDB = queryRes.rows;
+        const currentUser = request.cookies['user_username'];
         const data = {
-            posts: postsDB
+            posts: postsDB,
+            currentUser: currentUser
         };
         // if (err) {
         //     return console.error('Error executing query', err.stack)
@@ -205,17 +209,31 @@ app.post('/posts',(request, response)=>{
      const currentUser = request.cookies['user_username'];
      const currentUserId = request.cookies['user_id'];
 
-
     //get current user id
     //set the giver_id of the post as current user id
     let giver_id = currentUserId;
+    let postedBy = currentUser;
 
     let { receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
-    queryText = `INSERT INTO posts ( giver_id, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}, ${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
-    pool.query(queryText,(err,queryRes)=>{
-        response.render('showNewPost',queryRes.rows[0]);
+    queryText = `INSERT INTO posts ( giver_id, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}', '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
+    // getUserName = "SELECT username from users WHERE id='" + {giver_id} + "'";
+    pool.query(queryText, (err,queryRes)=>{
+
+
+        response.render('showNewPost', queryRes.rows[0]);
     });
 });
+
+
+// //insert into post
+// app.post('/posts',(request, response)=>{
+//     let { giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
+//     queryText = `INSERT INTO posts ( title, img, ingredients, area, address, content, expiry_date) VALUES ( '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
+//     pool.query(queryText,(err,result)=>{
+//         response.render('showSinglePost',result.rows[0]);
+//     });
+// });
+
 
 
 //show single post
@@ -223,7 +241,7 @@ app.get('/posts/:id',(request,response)=>{
     let {id} = request.params;
     queryText = `SELECT * FROM posts WHERE id=${id}`;
     pool.query(queryText,(err,queryRes)=>{
-        response.render('showSinglePost',queryRes.rows[0]);
+        response.render('showSinglePost', queryRes.rows[0]);
     });
 });
 
@@ -232,7 +250,7 @@ app.get('/posts/:id',(request,response)=>{
 app.put('/posts/:id', (request, response) => {
     let { id } = request.params;
     let { title, photo_url, ingredients } = request.body;
-    const queryText = `UPDATE posts SET title='${title}', img='${photo_url}', ingredients='${ingredients}', area='${area}', address='${address}', content='${content}', expiry_date='${expiry_date}', time_posted=${time_posted}WHERE id=${id} RETURNING *`;
+    const queryText = `UPDATE posts SET title='${title}', img='${img}', ingredients='${ingredients}', area='${area}', address='${address}', content='${content}', expiry_date='${expiry_date}', time_posted=${time_posted}WHERE id=${id} RETURNING *`;
     pool.query(queryText, (err, queryRes) => {
         response.render('showSinglePost', queryRes.rows[0]);
     });
@@ -272,6 +290,11 @@ app.post('/pendingRequest', (request, response) => {
 
 
    const currentUser = request.cookies['user_username'];
+   const data = {
+    currentUser: currentUser
+   }
+
+
     // response.render('pendingRequest');
     //update table with receiver id
     //redirect to same page
@@ -280,7 +303,8 @@ app.post('/pendingRequest', (request, response) => {
     // if receiver id not null, change button to pending
  //    response.cookie('user_username', user_username)
  //    //
- response.send(currentUser)
+ // response.send("requert made by " + currentUser);
+ response.render('pendingRequest', data);
 
 
 //set the receiver id of the post

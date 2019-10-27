@@ -13,6 +13,7 @@ class Index extends React.Component {
                 <div className="card-bodys" style={{  marginBottom: '20px'}}>
                      <h5 className="card-title">{title}</h5>
                     <p className="card-text">{address}</p>
+                    <p className="card-text">Posted by user {giver_id}</p>
                     <span style={{  float: 'right'}}>
                              <form className=" request-food form-inline my-2" method="POST" action={"/pendingRequest"}>
                                     <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
