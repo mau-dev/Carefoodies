@@ -8,7 +8,7 @@ class ShowNewPost extends React.Component {
 // grab and destructure object
 
 
-        let {id, giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
+        let {id, giver_id, posted_by, receiver_id, requested_by, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
             return (
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
             <NavbarLogged/>
@@ -20,7 +20,8 @@ class ShowNewPost extends React.Component {
                             <img src={img} className="img-fluid" style={{float: 'left', width: 'auto', margin: ' 5px', height: '450px'}}/>
                                <div style={{float: 'left', height: '400px', margin: ' 20px', width: '35%'}} >
                             <h1 >{title}</h1>
-                            <h5>posted by {giver_id} </h5>
+                            <h5>posted by {posted_by}</h5>
+                            <h5>requested by {requested_by}</h5>
                                 <p >{ingredients}</p>
                                 <p >{area}</p>
                                 <p >{address}</p>

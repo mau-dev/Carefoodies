@@ -1,17 +1,48 @@
 var React = require("react");
+const Layout = require('./layouts');
+const NavbarLogged = require('./navbarLoggedIn');
 
 class Home extends React.Component {
   render() {
 
 
     return (
-      <html>
-        <head>
-        </head>
-        <body>
-         <h1 style={{width: '100%', margin: '20% auto', textAlign: 'center', fontFamily: 'Montserrat'}}> Requested by {this.props.currentUser}</h1>
-        </body>
-      </html>
+
+
+<div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
+            <NavbarLogged/>
+            <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '100%'}}>
+                <main style={{backgroundColor: '#F7F7F5', width: '80%', margin: ' auto'}}>
+                    <div className="row" style={{backgroundColor: '#ffffff' , height: '500px', margin: ' 7% auto'}}>
+                        <div className="img-container" style={{float: 'left', width: '100%'}} >
+                            <div className="sing-p-img" style={{height: 'auto', margin: ' 15px'}}>
+                            <img src="http://localhost:3000/images/carefoodies-1.jpg" className="img-fluid" style={{float: 'left', width: 'auto', margin: ' 5px', height: '450px'}}/>
+                               <div style={{float: 'left', height: '400px', margin: ' 20px 50px', width: '35%'}} >
+                            <h1 style={{width: '100%', margin: '20% auto', textAlign: 'center', fontFamily: 'Montserrat'}}> Thanks for the request {this.props.currentUser}! <br/> {this.props.posted_by} will be nottified.</h1>
+                              <span style={{  float: 'right'}}>
+                             <form className=" request-food form-inline my-2" method="GET" action={"/posts"}>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Back" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                </form>
+                    </span>
+
+
+
+                        </div>
+
+                            </div>
+
+
+                         </div>
+
+                        </div>
+                        </main>
+                        </div>
+
+     </div>
+
+
+
+
     );
 
 

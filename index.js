@@ -66,6 +66,15 @@ app.use(cookieParser());
  */
 
 
+// Create a route and jsx file that renders a form for the user to register.
+// GET /register
+// Create a route that accepts the POST request from the form.
+// After the user has been put in the DB, set cookies to set them as logged in:
+// a cookie for their username
+// a cookie for their hashed loggedIn cookie
+// their user id
+// Redirect them to the home page.
+
 //landing page displays register form
 //login button on register page navigates to login form
 
@@ -212,27 +221,19 @@ app.post('/posts',(request, response)=>{
     //get current user id
     //set the giver_id of the post as current user id
     let giver_id = currentUserId;
+    //on the actual post replace 'posted by userId' with 'posted by username'
     let postedBy = currentUser;
 
     let { receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
-    queryText = `INSERT INTO posts ( giver_id, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}', '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
-    // getUserName = "SELECT username from users WHERE id='" + {giver_id} + "'";
+    queryText = `INSERT INTO posts ( giver_id, posted_by, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}', '${postedBy}', '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
+
     pool.query(queryText, (err,queryRes)=>{
+
 
 
         response.render('showNewPost', queryRes.rows[0]);
     });
 });
-
-
-// //insert into post
-// app.post('/posts',(request, response)=>{
-//     let { giver_id, receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
-//     queryText = `INSERT INTO posts ( title, img, ingredients, area, address, content, expiry_date) VALUES ( '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
-//     pool.query(queryText,(err,result)=>{
-//         response.render('showSinglePost',result.rows[0]);
-//     });
-// });
 
 
 
@@ -266,14 +267,6 @@ app.delete('/posts/:id', (request, response) => {
 });
 
 
-// Create a route and jsx file that renders a form for the user to register.
-// GET /register
-// Create a route that accepts the POST request from the form.
-// After the user has been put in the DB, set cookies to set them as logged in:
-// a cookie for their username
-// a cookie for their hashed loggedIn cookie
-// their user id
-// Redirect them to the home page.
 
 
 //figure out how this will work?
@@ -290,10 +283,14 @@ app.post('/pendingRequest', (request, response) => {
 
 
    const currentUser = request.cookies['user_username'];
+    const currentUserId = request.cookies['user_id'];
+    let { id } = currentUserId ;
    const data = {
-    currentUser: currentUser
+    currentUser: currentUser,
+    currentUserId: currentUserId
    }
 
+ const queryText = `UPDATE posts SET receiver_id=${currentUserId}, requested_by=${currentUser} WHERE id=${id} RETURNING *`;
 
     // response.render('pendingRequest');
     //update table with receiver id
@@ -304,7 +301,14 @@ app.post('/pendingRequest', (request, response) => {
  //    response.cookie('user_username', user_username)
  //    //
  // response.send("requert made by " + currentUser);
- response.render('pendingRequest', data);
+
+pool.query(queryText, (err, queryRes) => {
+        // response.render('pendingRequest', queryRes.rows[0]);
+        response.render('pendingRequest', data);
+    });
+
+
+ // response.render('pendingRequest', data);
 
 
 //set the receiver id of the post

@@ -8,7 +8,9 @@ CREATE TABLE users (
 CREATE TABLE posts (
 	id SERIAL PRIMARY KEY,
 	giver_id INTEGER,
+	posted_by TEXT,
 	receiver_id INTEGER,
+	requested_by TEXT,
 	pending_request BOOLEAN,
 	settled_request BOOLEAN,
 	title TEXT,
