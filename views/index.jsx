@@ -18,7 +18,7 @@ class Index extends React.Component {
                     <p className="card-text">requested by {requested_by}</p>
                     <span style={{  float: 'right'}}>
                              <form className=" request-food form-inline my-2" method="POST"  action={"/posts/"+id + "/edit?_method=put"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" onClick="this.innerHTML = 'Pending...'" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
                                 </form>
                     </span>
                  </div>
