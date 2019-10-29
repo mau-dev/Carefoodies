@@ -334,6 +334,7 @@ app.put('/posts/:id/edit',(request,response)=>{
 app.get('/posts/:id',(request,response)=>{
     let {id} = request.params.id;
 
+
  const currentUser = request.cookies['user_username'];
     const currentUserId = request.cookies['user_id'];
     //attempt to use cookie stored from post as postedBy
@@ -360,7 +361,31 @@ app.get('/posts/:id',(request,response)=>{
     });
 });
 
+//user profile
+app.get('/user', (request, response) => {
+    const currentUser = request.cookies['user_username'];
 
+  console.log('this should be rposted_by' + currentUser);
+  console.log('request.body' + request.body);
+
+
+
+    const queryText = `SELECT * FROM posts WHERE posted_by='${currentUser}'`;
+    pool.query(queryText, (err, queryRes) => {
+         // console.log('result' + queryRes);
+        const postsDB = queryRes.rows;
+        const currentUser = request.cookies['user_username'];
+        const data = {
+            posts: postsDB,
+            currentUser: currentUser
+        };
+        // if (err) {
+        //     return console.error('Error executing query', err.stack)
+        // }
+        // console.log(queryRes.rows);
+        response.render('userProfile', data);
+    });
+});
 
 
 

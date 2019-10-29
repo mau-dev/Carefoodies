@@ -31,6 +31,7 @@ class NavbarLogedIn extends React.Component {
                                     <li>{this.props.currentUser} </li>
                                  </ul>
 
+                                 <span><a className="nav-link" style={{ color: '#CC46E0'}} href="http://localhost:3000/user">Profile</a></span>
                                <span className="icon" href="http://localhost:3000/posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="http://localhost:3000/login"><img src="http://localhost:3000/images/profile-icon.png" style={{ height: '30px'}}/></a></span>
 
                                 <form className="form-inline my-2 my-lg-0" method="GET" action={"/posts/new"}>
