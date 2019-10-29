@@ -50,6 +50,10 @@ app.engine('jsx', reactEngine);
 
 app.use(cookieParser());
 
+//require moment.js
+var moment = require('moment');
+moment().format();
+
 //plan
 // layout component for register/login
 //landing page goes to registerForm.jsx, app.get('/register')
@@ -131,7 +135,7 @@ app.get('/login', (request, response) => {
     response.render('login')
 });
 
-var currentUser;
+
 
 //login post method
 app.post('/login', (request, response) => {
@@ -185,11 +189,10 @@ app.post('/login', (request, response) => {
 });
 
 
-console.log('this is currentUser ' + currentUser);
 
 //see all posts page
 app.get('/posts/', (request, response) => {
-    const queryText = "SELECT * FROM posts";
+    const queryText = "SELECT * FROM posts ORDER BY (id)";
     pool.query(queryText, (err, queryRes) => {
         const postsDB = queryRes.rows;
         const currentUser = request.cookies['user_username'];
@@ -214,6 +217,8 @@ app.get('/posts/new', (request, response) => {
 
 //insert into post
 app.post('/posts',(request, response)=>{
+
+
     // request.cookie('user_username', user_username);
      const currentUser = request.cookies['user_username'];
      const currentUserId = request.cookies['user_id'];
@@ -223,6 +228,8 @@ app.post('/posts',(request, response)=>{
     let giver_id = currentUserId;
     //on the actual post replace 'posted by userId' with 'posted by username'
     let postedBy = currentUser;
+    // response.cookie('postedBy', postedBy);
+
 
     let { receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
     queryText = `INSERT INTO posts ( giver_id, posted_by, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}', '${postedBy}', '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
@@ -250,7 +257,7 @@ app.get('/posts/:id',(request,response)=>{
 // update post
 app.put('/posts/:id', (request, response) => {
     let { id } = request.params;
-    let { title, photo_url, ingredients } = request.body;
+    let { title, img, ingredients, area, address, content, expiry_date, time_posted } = request.body;
     const queryText = `UPDATE posts SET title='${title}', img='${img}', ingredients='${ingredients}', area='${area}', address='${address}', content='${content}', expiry_date='${expiry_date}', time_posted=${time_posted}WHERE id=${id} RETURNING *`;
     pool.query(queryText, (err, queryRes) => {
         response.render('showSinglePost', queryRes.rows[0]);
@@ -267,30 +274,44 @@ app.delete('/posts/:id', (request, response) => {
 });
 
 
+// //figure out how this will work?
+// app.get('/pendingRequest/new', (request, response) => {
+//     //  const currentUser = request.cookies['user_username'];
+//     // //landing page display register form
+//     // // response.render('pendingRequest');
+//     // response.cookie('user_username', user_username);
+//     // response.send(currentUser);
+//     // // response.render('pendingRequest');
+// });
 
 
-//figure out how this will work?
-app.get('/pendingRequest/new', (request, response) => {
-    //  const currentUser = request.cookies['user_username'];
-    // //landing page display register form
-    // // response.render('pendingRequest');
-    // response.cookie('user_username', user_username);
-    // response.send(currentUser);
-    // // response.render('pendingRequest');
-});
+//commented out on tuesday
 
-app.post('/pendingRequest', (request, response) => {
+
+
+
+// // this should be app.put/patch, and query = update posts... make app.post for posting requested to user ptofile
+app.get('/pendingRequest', (request, response) => {
 
 
    const currentUser = request.cookies['user_username'];
     const currentUserId = request.cookies['user_id'];
+    //attempt to use cookie stored from post as postedBy
+    const postedBy = request.cookies['postedBy']; //this remains the user who posted last
+    console.log("posted by" + postedBy);
+    console.log("req.body" + request.body.giver_id);
+
+
     let { id } = currentUserId ;
    const data = {
     currentUser: currentUser,
-    currentUserId: currentUserId
+    currentUserId: currentUserId,
+    postedBy: postedBy
    }
 
  const queryText = `UPDATE posts SET receiver_id=${currentUserId}, requested_by=${currentUser} WHERE id=${id} RETURNING *`;
+ //comment this out to prevent of createing new posts on request
+  // const queryText = `INSERT INTO posts ( receiver_id, requested_by) VALUES ( '${currentUserId }', '${currentUser}') RETURNING *`
 
     // response.render('pendingRequest');
     //update table with receiver id
@@ -302,8 +323,12 @@ app.post('/pendingRequest', (request, response) => {
  //    //
  // response.send("requert made by " + currentUser);
 
+
+
 pool.query(queryText, (err, queryRes) => {
+
         // response.render('pendingRequest', queryRes.rows[0]);
+
         response.render('pendingRequest', data);
     });
 
@@ -313,7 +338,131 @@ pool.query(queryText, (err, queryRes) => {
 
 //set the receiver id of the post
 
-})
+});
+
+// //test for put/pstch
+// app.put('/posts/:id', (request, response) => {
+
+// let {id} = request.params;
+//    const currentUser = request.cookies['user_username'];
+//     const currentUserId = request.cookies['user_id'];
+//     //attempt to use cookie stored from post as postedBy
+//     const postedBy = request.cookies['postedBy'];
+
+
+//     // let { id } = currentUserId ;
+//    const data = {
+//     currentUser: currentUser,
+//     currentUserId: currentUserId,
+//     postedBy: postedBy
+//    }
+
+//  const queryText = `UPDATE posts SET receiver_id=${currentUserId}, requested_by=${currentUser} WHERE id=${id} RETURNING *`;
+//  //comment this out to prevent of createing new posts on request
+//   // const queryText = `INSERT INTO posts ( receiver_id, requested_by) VALUES ( '${currentUserId }', '${currentUser}') RETURNING *`
+
+//     // response.render('pendingRequest');
+//     //update table with receiver id
+//     //redirect to same page
+//     //if current user === giver_id user hide request button
+//     //if receiver id === null, show request button
+//     // if receiver id not null, change button to pending
+//  //    response.cookie('user_username', user_username)
+//  //    //
+//  // response.send("requert made by " + currentUser);
+
+// pool.query(queryText, (err, queryRes) => {
+//         // response.render('pendingRequest', queryRes.rows[0]);
+//         response.redirect('pendingRequest', data);
+//     });
+
+
+//  // response.render('pendingRequest', data);
+
+
+// //set the receiver id of the post
+
+// })
+
+
+// commented out on tuesday until here
+
+
+/**
+ * ===================================
+ * tuesday's new approach
+ * ===================================
+ */
+
+//edit app.get
+app.put('/posts/:id/edit',(request,response)=>{
+    let id = request.params.id;
+
+
+ const currentUser = request.cookies['user_username'];
+    const currentUserId = request.cookies['user_id'];
+    //attempt to use cookie stored from post as postedBy
+    const postedBy = request.cookies['postedBy']; //this remains the user who posted last
+    console.log("posted by" + postedBy);
+    console.log("req.body" + request.body.giver_id);
+
+
+
+    // let { id } = currentUserId ;
+   const data = {
+    currentUser: currentUser,
+    currentUserId: currentUserId,
+    postedBy: postedBy
+   }
+  console.log('this should be receiver id' + currentUserId);
+  console.log('this should be requested_by' + currentUser);
+  console.log('the id ' + id);
+    // queryText = `SELECT * FROM posts WHERE id=${id}`
+       // const queryText = `UPDATE posts SET receiver_id=${currentUserId}, requested_by=${currentUser} WHERE id=${id}`;
+       const queryText = `UPDATE posts SET receiver_id='${currentUserId}', pending_request=TRUE, requested_by='${currentUser}' WHERE id=${id}`;
+        // UPDATE posts SET receiver_id=4, requested_by='kenny' WHERE id=1;
+    pool.query(queryText,(err,result)=>{
+        console.log(result);
+        // console.log('query', result.rows[0] );
+        // response.render('pendingRequest',result.rows[0]);
+        response.render('pendingRequest', data);
+
+        // console.log('new stuff', requested_by)
+    });
+});
+
+//update the database app.put
+app.get('/posts/:id',(request,response)=>{
+    let {id} = request.params.id;
+
+ const currentUser = request.cookies['user_username'];
+    const currentUserId = request.cookies['user_id'];
+    //attempt to use cookie stored from post as postedBy
+    const postedBy = request.cookies['postedBy']; //this remains the user who posted last
+    console.log("posted by" + postedBy);
+    console.log("req.body" + request.body.giver_id);
+
+
+    // let { id } = currentUserId ;
+   const data = {
+    currentUser: currentUser,
+    currentUserId: currentUserId,
+    postedBy: postedBy
+   }
+
+
+
+   const queryText = `SELECT * FROM posts WHERE id=${id}`
+   // const queryText = `UPDATE posts SET receiver_id=${currentUserId}, requested_by=${currentUser} WHERE id=${id} RETURNING *`;
+    pool.query(queryText,(err,result)=>{
+        // console.log('query', result.rows[0] );
+        // res.render('index',result.rows[0]);
+        response.render('pendingRequest', data);
+    });
+});
+
+
+
 
 /**
  * ===================================

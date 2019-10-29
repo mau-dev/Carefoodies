@@ -26,8 +26,13 @@ class ShowSinglePost extends React.Component {
                              <p >{content}</p>
                              <p >{expiryDate}</p>
                               <span style={{  float: 'right'}}>
-                             <form className=" request-food form-inline my-2" method="POST" action={"/pendingRequest"}>
+                          {/* this is post method <form className=" request-food form-inline my-2" method="PUT" action={"/posts/"+id"/edit"}>*/}
+                          <form className=" request-food form-inline my-2" method="POST"  action={"/posts/"+id + "/edit?_method=put"}>
+                          {/* this is post method <form className=" request-food form-inline my-2" method="GET" action={"/pendingRequest"}>*/}
+
+
                                     <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+
                                 </form>
                     </span>
 
