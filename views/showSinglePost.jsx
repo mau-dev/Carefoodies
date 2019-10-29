@@ -8,6 +8,7 @@ class ShowSinglePost extends React.Component {
 // grab and destructure object
         let {id, giver_id, posted_by, receiver_id, requested_by, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
         return (
+
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
             <NavbarLogged/>
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '100%'}}>
@@ -31,7 +32,7 @@ class ShowSinglePost extends React.Component {
                           {/* this is post method <form className=" request-food form-inline my-2" method="GET" action={"/pendingRequest"}>*/}
 
 
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" onClick="changeButton()" id='reqBtn' style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
 
                                 </form>
                     </span>
@@ -48,6 +49,8 @@ class ShowSinglePost extends React.Component {
                         </div>
                         </main>
                         </div>
+
+
 
      </div>
 

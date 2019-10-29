@@ -124,7 +124,7 @@ app.post('/register', (request, response) => {
             response.cookie('loggedin', hashedCookie)
             response.cookie('user_id', userID)
 
-            response.render('login');
+            response.redirect('login');
         }
     });
 });
@@ -177,16 +177,28 @@ app.post('/login', (request, response) => {
                    console.log('this is currentUser from inside ' + currentUser);
                     // if it matches they have been verified, log them in
                     //after login redirect to posts page
-                    response.redirect('/posts/', 302);
+                    response.redirect('/welcome', 302);
                 } else {
-                    response.status(403).send('wrong password');
+                    // response.status(403).send('wrong password');
+                    response.status(403).render('wrongPassword');
                 }
             } else {
-                response.status(403).send('wrong username');
+                // response.status(403).send('wrong username');
+                response.status(403).render('wrongUsername');
             }
         }
     });
 });
+
+
+app.get('/welcome', (request, response) => {
+     const currentUser = request.cookies['user_username'];
+     data = {
+        currentUser: currentUser
+     }
+    response.render('welcome', data);
+});
+
 
 
 
