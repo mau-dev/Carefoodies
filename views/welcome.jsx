@@ -47,7 +47,7 @@ class Welcome extends React.Component {
                                     <input className="btn my-2 my-sm-0" type="submit" value="Share food" style={{ display: 'inline', marginLeft: '30px', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
                                 </form>
                                 </div>
-                                <img src="http://localhost:3000/images/welcome-img.png"  className="img-fluid" style={{float: 'left', width: '65%', height: 'auto', margin: '10% 20%'}}/>
+                                <img src="./images/welcome-img.png"  className="img-fluid" style={{float: 'left', width: '65%', height: 'auto', margin: '10% 20%'}}/>
                     </div>
                     </div>
                 </main>

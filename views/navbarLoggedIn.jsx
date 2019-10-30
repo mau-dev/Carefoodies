@@ -16,7 +16,7 @@ class NavbarLogedIn extends React.Component {
                 <body>
                     <div className="container-fluid" style={{ padding:'0'}}>
                         <nav className="navbar navbar-expand-lg " style={{ padding: '10px 50px', borderBottom: '1px solid #E3E3E1', backgroundColor: 'white',fontFamily: 'Montserrat'}}>
-                            <span className="navbar-brand" href="http://localhost:3000/posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="http://localhost:3000/posts/"><img src="./images/carefoodies-logo.png" style={{ height: '30px', marginTop: '-13px'}}/></a></span>
+                            <span className="navbar-brand" href="./posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="./3000/posts/"><img src="./images/carefoodies-logo.png" style={{ height: '30px', marginTop: '-13px'}}/></a></span>
                                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <span className="navbar-toggler-icon"></span>
                             </button>
@@ -32,7 +32,7 @@ class NavbarLogedIn extends React.Component {
                                  </ul>
 
                                  <span><a className="nav-link" style={{ color: '#CC46E0'}} href="./user">Profile</a></span>
-                               <span className="icon" href="http://localhost:3000/posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="./login"><img src="http://localhost:3000/images/profile-icon.png" style={{ height: '30px'}}/></a></span>
+                               <span className="icon" href="./posts" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="./login"><img src="./images/profile-icon.png" style={{ height: '30px'}}/></a></span>
 
                                 <form className="form-inline my-2 my-lg-0" method="GET" action={"/posts/new"}>
                                     <input className="btn my-2 my-sm-0" type="submit" value="Post Food" style={{ marginLeft: '20px', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
