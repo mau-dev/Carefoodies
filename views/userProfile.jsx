@@ -18,7 +18,7 @@ class User extends React.Component {
                     <p className="card-text">requested by<mark> {requested_by}</mark></p>
                     <span style={{  float: 'right'}}>
                              <form className=" request-food form-inline my-2" method="GET" action={"/pendingRequest"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Accept Request" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
                                 </form>
                     </span>
                  </div>

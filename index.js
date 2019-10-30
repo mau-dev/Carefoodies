@@ -9,12 +9,37 @@ const sha256 = require('js-sha256');
 var SALT = "Foodies that care about the food waste;"
 
 // Initialise postgres client
-const configs = {
-    user: 'mariadimitrijevic',
-    host: '127.0.0.1',
-    database: 'carefoodies_db',
-    port: 5432,
+// const configs = {
+//     user: 'mariadimitrijevic',
+//     host: '127.0.0.1',
+//     database: 'carefoodies_db',
+//     port: 5432,
+// };
+var configs;
+if( process.env.DATABASE_URL ){
+
+    const params = url.parse(process.env.DATABASE_URL);
+    const auth = params.auth.split(':');
+
+    configs = {
+        user: auth[0],
+        password: auth[1],
+        host: params.hostname,
+        port: params.port,
+        database: params.pathname.split('/')[1],
+        ssl: true
+    };
+
+}else{
+    configs = {
+        user: 'mariadimitrijevic',
+        host: '127.0.0.1',
+        database: 'carefoodies_db',
+        port: 5432
+    };
 };
+
+
 
 const pool = new pg.Pool(configs);
 
