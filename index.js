@@ -58,6 +58,7 @@ pool.on('error', function(err) {
 const app = express();
 //public folder use
 app.use(express.static('public'));
+app.use(express.static(__dirname+'/public'));
 
 //body parser
 app.use(express.json());

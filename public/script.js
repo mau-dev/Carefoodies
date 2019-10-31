@@ -1,5 +1,10 @@
+const btn = document.getElementById("reqBtn");
+
 function changeButton() {
- const btn = document.getElementById("reqBtn");
+
  btn.style.color = "red";
-  btn.value = "Pending";
+  btn.innerHTML = "Pending";
+
                        };
+
+ btn.addEventListener('click', changeButton() )

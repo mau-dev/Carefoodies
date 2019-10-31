@@ -2,6 +2,7 @@
 const React = require('react');
 const Layout = require('./layouts');
 const NavbarLogged = require('./navbarLoggedIn');
+const Script = require('./public');
 
 class ShowSinglePost extends React.Component {
     render() {
@@ -32,7 +33,7 @@ class ShowSinglePost extends React.Component {
                           {/* this is post method <form className=" request-food form-inline my-2" method="GET" action={"/pendingRequest"}>*/}
 
 
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" onClick="changeButton()" id='reqBtn' style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" id='reqBtn' style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
 
                                 </form>
                     </span>
