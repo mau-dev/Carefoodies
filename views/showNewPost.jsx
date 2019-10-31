@@ -26,7 +26,7 @@ class ShowNewPost extends React.Component {
                                 <p >{area}</p>
                                 <p >{address}</p>
                              <p >{content}</p>
-                             <p >{expiryDate}</p>
+                             {/*<p >{expiryDate}</p>*/}
 
 <div className="row">
                                 <div className="col">
