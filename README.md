@@ -1,6 +1,6 @@
 # ![](https://ga-dash.s3.amazonaws.com/production/assets/logo-9f88ae6c9c3871690e33280fcf557f33.png) Project #2: Carefoodies
 
-# My first full-stack app
+# My first full-stack app https://stark-thicket-79076.herokuapp.com/
 
 ### Technologies used
 
