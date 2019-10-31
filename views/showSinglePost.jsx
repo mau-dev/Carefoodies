@@ -40,7 +40,7 @@ class ShowSinglePost extends React.Component {
 
                             {button}
                                 </form>
-                            }
+
                     </span>
 
 
