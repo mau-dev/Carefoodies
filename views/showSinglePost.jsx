@@ -26,7 +26,7 @@ class ShowSinglePost extends React.Component {
                                 <p >{area}</p>
                                 <p >{address}</p>
                              <p >{content}</p>
-                             <p >{expiryDate}</p>
+                             {/*<p >{expiryDate}</p>*/}
                               <span style={{  float: 'right'}}>
                           {/* this is post method <form className=" request-food form-inline my-2" method="PUT" action={"/posts/"+id"/edit"}>*/}
                           <form className=" request-food form-inline my-2" method="POST"  action={"/posts/"+id + "/edit?_method=put"}>
