@@ -8,6 +8,11 @@ class ShowSinglePost extends React.Component {
     render() {
 // grab and destructure object
         let {id, giver_id, posted_by, receiver_id, requested_by, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
+        let button = <input className="btn my-2 my-sm-0" type="submit" value="Request" onClick="this.innerHTML = 'Pending...'" style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+
+        if (pending_request === true ){
+            button = <input className="btn my-2 my-sm-0" type="submit" value="Pending" onClick="this.innerHTML = 'Pending...'" style={{ marginRight: '10px', float: 'right', backgroundColor: '#1A55D6', color: 'white', borderRadius: '8px'}}/>
+        }
         return (
 
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
@@ -33,9 +38,9 @@ class ShowSinglePost extends React.Component {
                           {/* this is post method <form className=" request-food form-inline my-2" method="GET" action={"/pendingRequest"}>*/}
 
 
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Request" id='reqBtn' style={{ marginRight: '10px', float: 'right', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
-
+                            {button}
                                 </form>
+                            }
                     </span>
 
 
