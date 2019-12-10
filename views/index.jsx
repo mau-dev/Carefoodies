@@ -18,8 +18,8 @@ class Index extends React.Component {
                      <h5 className="card-title">{title}</h5>
                     <p className="card-text">{address}</p>
 
-                    <p className="card-text">Posted by user {posted_by}</p>
-                    <p className="card-text">requested by {requested_by}</p>
+                    <p className="card-text ">Posted by {posted_by.charAt(0).toUpperCase() + posted_by.slice(1)}</p>
+                    <p className="card-text "> {requested_by !== null ? 'Requested by ' + requested_by.charAt(0).toUpperCase() + requested_by.slice(1) : 'Available'} </p>
                     <span style={{  float: 'right'}}>
                              <form className=" request-food form-inline my-2" method="POST"  action={"/posts/"+id + "/edit?_method=put"}>
                              {button}
