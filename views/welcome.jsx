@@ -9,7 +9,7 @@ class Welcome extends React.Component {
         return (
             <div style={{fontFamily: 'Montserrat'}}>
                 <NavbarLogged />
-                <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
+                <main style={{backgroundColor: '#F7F7F5', height: '100vh'}}>
                       <div style={{backgroundColor: '#F7F7F5', width: '50vw', height: '100%', display: 'block', margin: '0', padding: '6% 0 0 6% ', float: 'left'}}>
                        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
   <div className="carousel-inner">
@@ -37,17 +37,17 @@ class Welcome extends React.Component {
 </div>
                     </div>
                                         <div style={{backgroundColor: '#F7F7F5', width: '50vw', height: '100%', display: 'block', margin: '0 ', padding: '0 5%', float: 'right'}}>
-                                        <div style={{backgroundColor: '#ffffff', width: '80%', height: '70%', borderRadius: '8%', margin: '15% auto', padding: '40px'}}>
-                      <h3 style={{width: '70%', margin: '5% auto 0 auto', textAlign: 'center', fontFamily: 'Montserrat'}}> Welcome back <span style={{color: '#5CE048'}}> {this.props.currentUser}</span>! </h3>
-                      <div style={{width: '90%', display: 'block', margin: '30px auto'}}>
+                                        <div style={{backgroundColor: '#ffffff', width: '80%', height: '450px', borderRadius: '8%', margin: '15% auto', padding: '40px'}}>
+                      <h3 style={{width: '70%', margin: '5% auto 0 auto', textAlign: 'center', fontFamily: 'Montserrat'}}> Welcome back <span style={{color: '#5CE048', textTransform: 'capitalize'}}> {this.props.currentUser}</span>! </h3>
+                      <div style={{width: '90%', display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap',  margin: '30px auto'}}>
                       <form className="d-inline my-2 my-lg-0" method="GET" action={"/posts"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Start exploring" style={{ display: 'inline', marginLeft: '30px', border: '1px solid #CC46E0', color: '#CC46E0', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Start exploring" style={{ display: 'inline', border: '1px solid #CC46E0', color: '#CC46E0', borderRadius: '8px'}}/>
                                 </form>
                                 <form className="d-inline my-2 my-lg-0" method="GET" action={"/posts/new"}>
-                                    <input className="btn my-2 my-sm-0" type="submit" value="Share food" style={{ display: 'inline', marginLeft: '30px', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
+                                    <input className="btn my-2 my-sm-0" type="submit" value="Share food" style={{ display: 'inline', backgroundColor: '#CC46E0', color: 'white', borderRadius: '8px'}}/>
                                 </form>
                                 </div>
-                                <img src="./images/welcome-img.png"  className="img-fluid" style={{float: 'left', width: '65%', height: 'auto', margin: '10% 20%'}}/>
+                                <img src="./images/welcome-img.png"  className="img-fluid" style={{float: 'left', width: '80%', height: 'auto', margin: '10%'}}/>
                     </div>
                     </div>
                 </main>
