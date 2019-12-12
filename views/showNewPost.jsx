@@ -17,7 +17,7 @@ class ShowNewPost extends React.Component {
                     <div className="row" style={{backgroundColor: '#ffffff' , height: '500px', margin: ' 7% auto'}}>
                         <div className="img-container" style={{float: 'left', width: '100%'}} >
                             <div className="sing-p-img" style={{height: 'auto', margin: ' 15px'}}>
-                            <img src={img} className="img-fluid" style={{float: 'left', width: 'auto', margin: ' 5px', height: '450px'}}/>
+                            <img src={img} className="img-fluid" style={{float: 'left', width: '50%', margin: ' 5px', height: '450px', objectFit: 'cover'}}/>
                                <div style={{float: 'left', height: '400px', margin: ' 20px', width: '35%'}} >
                             <h1 >{title}</h1>
                             <h5>posted by {posted_by}</h5>
