@@ -11,6 +11,10 @@ class Index extends React.Component {
             if (pending_request === true) {
                 button = <input className="btn my-2 my-sm-0" type="submit" value="Pending" onClick="this.innerHTML = 'Pending...'" style={{ marginRight: '10px', float: 'right', backgroundColor: '#1A55D6', color: 'white', borderRadius: '8px'}}/>
             }
+             let available = <p style={{ color: '#5CE048'}}>Available</p>;
+
+
+
             return (
                 <div className="card col-xl-3 col-lg-3 col-md-5 col-sm-9 col-10 float-left" style={{ margin: '50px 1%', borderRadius: '10px'}}>
                <a href={"/posts/"+item.id}> <img height="300px" width="auto" src={item.img} href={"/posts/"+item.id} className="card-img-top" style={{  padding: '15px 0', objectFit: 'cover'}}/></a>
@@ -18,8 +22,8 @@ class Index extends React.Component {
                      <h5 className="card-title">{title}</h5>
                     <p className="card-text">{address}</p>
 
-                    <p className="card-text ">Posted by {posted_by.charAt(0).toUpperCase() + posted_by.slice(1)}</p>
-                    <p className="card-text "> {requested_by !== null ? 'Requested by ' + requested_by.charAt(0).toUpperCase() + requested_by.slice(1) : 'Available'} </p>
+                    <p className="card-text d-inline-block">Posted by {posted_by.charAt(0).toUpperCase() + posted_by.slice(1)}</p><br/>
+                    <p className="card-text d-inline "> {requested_by !== null ? 'Requested by ' + requested_by.charAt(0).toUpperCase() + requested_by.slice(1) : available } </p>
                     <span style={{  float: 'right'}}>
                              <form className=" request-food form-inline my-2" method="POST"  action={"/posts/"+id + "/edit?_method=put"}>
                              {button}

@@ -1,5 +1,5 @@
 console.log("starting up!!");
-
+//require dependencies
 const express = require('express');
 const methodOverride = require('method-override');
 const pg = require('pg');
