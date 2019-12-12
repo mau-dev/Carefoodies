@@ -200,8 +200,8 @@ app.post('/login', (request, response) => {
                     response.cookie('hasLoggedIn', hashedCookie);
                     console.log('user id logged in as ' + user_id);
                   //not working
-                   const currentUser = request.cookies['user_username'];
-                   console.log('this is currentUser from inside ' + currentUser);
+                   // const currentUser = request.cookies['user_username'];
+                   // console.log('this is currentUser from inside ' + currentUser);
                     // if it matches they have been verified, log them in
                     //after login redirect to posts page
                     response.redirect('/welcome', 302);
