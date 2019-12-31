@@ -34,11 +34,14 @@ var React = require('react');
 const Layout = require('./layouts');
 const Navbar = require('./navbar');
 const RegisterForm = require('./regFormComponent');
+const Head = require('./head');
 
 class Register extends React.Component {
 
   render() {
         return (
+            <div>
+            <Head />
             <div style={{fontFamily: 'Montserrat'}}>
             <Navbar />
                 <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
@@ -76,6 +79,7 @@ class Register extends React.Component {
                     </div>
                     </div>
                 </main>
+            </div>
             </div>
     );
   }

@@ -2,6 +2,7 @@
 const React = require('react');
 const Layout = require('./layouts');
 const NavbarLogged = require('./navbarLoggedIn');
+const Head = require('./head');
 
 
 class ShowSinglePost extends React.Component {
@@ -14,6 +15,8 @@ class ShowSinglePost extends React.Component {
             button = <input className="btn my-2 my-sm-0" type="submit" value="Pending" onClick="this.innerHTML = 'Pending...'" style={{ marginRight: '10px', float: 'right', backgroundColor: '#1A55D6', color: 'white', borderRadius: '8px'}}/>
         }
         return (
+            <div>
+            <Head />
 
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
             <NavbarLogged/>
@@ -58,6 +61,7 @@ class ShowSinglePost extends React.Component {
 
 
 
+     </div>
      </div>
 
         );

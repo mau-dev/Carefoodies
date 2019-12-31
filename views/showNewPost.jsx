@@ -2,6 +2,7 @@
 const React = require('react');
 const Layout = require('./layouts');
 const NavbarLogged = require('./navbarLoggedIn');
+const Head = require('./head');
 
 class ShowNewPost extends React.Component {
     render() {
@@ -10,6 +11,8 @@ class ShowNewPost extends React.Component {
 
         let {id, giver_id, posted_by, receiver_id, requested_by, pending_request, settled_request, title, img, ingredients, area, address, content, expiryDate, time_posted  } = this.props;
             return (
+                <div>
+                <Head />
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
             <NavbarLogged/>
             <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '100%'}}>
@@ -53,6 +56,7 @@ class ShowNewPost extends React.Component {
                         </main>
                         </div>
 
+     </div>
      </div>
 
         );

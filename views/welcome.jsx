@@ -3,10 +3,13 @@ const Layout = require('./layouts');
 const Navbar = require('./navbar');
 const NavbarLogged = require('./navbarLoggedIn');
 const LoginForm = require('./logFormComponent');
+const Head = require('./head');
 
 class Welcome extends React.Component {
   render() {
         return (
+            <div>
+            <Head />
             <div style={{fontFamily: 'Montserrat'}}>
                 <NavbarLogged />
                 <main style={{backgroundColor: '#F7F7F5', height: '100vh'}}>
@@ -51,6 +54,7 @@ class Welcome extends React.Component {
                     </div>
                     </div>
                 </main>
+            </div>
             </div>
     );
   }

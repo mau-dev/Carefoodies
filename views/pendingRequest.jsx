@@ -1,12 +1,15 @@
 var React = require("react");
 const Layout = require('./layouts');
 const NavbarLogged = require('./navbarLoggedIn');
+const Head = require('./head');
 
 class Home extends React.Component {
   render() {
 
 
     return (
+        <div>
+        <Head />
 
 
 <div style={{backgroundColor: '#F7F7F5', width: '100%', height: '90vh'}}>
@@ -39,6 +42,7 @@ class Home extends React.Component {
                         </main>
                         </div>
 
+     </div>
      </div>
 
 

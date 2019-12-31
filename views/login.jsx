@@ -2,10 +2,13 @@ var React = require('react');
 const Layout = require('./layouts');
 const Navbar = require('./navbar');
 const LoginForm = require('./logFormComponent');
+const Head = require('./head');
 
 class Login extends React.Component {
-  render() {
+    render() {
         return (
+            <div>
+            <Head />
             <div style={{fontFamily: 'Montserrat'}}>
                 <Navbar />
                 <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
@@ -40,8 +43,9 @@ class Login extends React.Component {
                     </div>
                 </main>
             </div>
-    );
-  }
+            </div>
+        );
+    }
 }
 
 module.exports = Login;

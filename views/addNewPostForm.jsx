@@ -1,11 +1,13 @@
 const React = require("react");
 const Layout = require('./layouts');
 const NavbarLogged = require('./navbarLoggedIn');
+const Head = require('./head');
 
 class NewPost extends React.Component {
   render() {
     return (
         <div>
+        <Head />
            <NavbarLogged />
                 <div style={{width: '100%', height: '90vh',backgroundColor: '#F7F7F5'}}>
                     <form method="post" action="/posts" style={{width: '500px', margin: '0 auto'}} ><br/><br/>

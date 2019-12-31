@@ -1,21 +1,14 @@
 const React = require('react');
 const Navbar = require('./navbar');
 const NavbarLogged = require('./navbarLoggedIn');
+const Head = require('./head');
 
 class Layout extends React.Component {
     render() {
         return (
             <html>
-                <head>
-                <meta name="viewport" content="width=device-width,initial-scale=1"></meta>
-                    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossOrigin="anonymous"></link>
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat&display=swap" rel="stylesheet"></link>
-                    <link href="https://fonts.googleapis.com/css?family=Nunito+Sans|Roboto:900&display=swap" rel="stylesheet"></link>
+             <Head />
 
-                    <title>Carefoodies</title>
-
-
-                </head>
                 <body style={{backgroundColor: '#F7F7F5'}}>
                     <div className="container-fluid" style={{ padding:'0'}}>
                     <NavbarLogged />

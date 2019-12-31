@@ -2,10 +2,13 @@ var React = require('react');
 const Layout = require('./layouts');
 const Navbar = require('./navbar');
 const WrongUser = require('./componentWrongUser');
+const Head = require('./head');
 
 class Login extends React.Component {
   render() {
         return (
+            <div>
+            <Head />
             <div style={{fontFamily: 'Montserrat'}}>
                 <Navbar />
                 <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
@@ -39,6 +42,7 @@ class Login extends React.Component {
                         <WrongUser/> {this.props.children}
                     </div>
                 </main>
+            </div>
             </div>
     );
   }
