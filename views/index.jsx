@@ -38,7 +38,7 @@ class Index extends React.Component {
                                 </form>
                     </span>
                  </div>
-                <div class="offset-md-1">
+                <div className="offset-md-1">
                 </div>
             </div>
 

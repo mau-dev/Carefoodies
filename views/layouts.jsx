@@ -9,7 +9,7 @@ class Layout extends React.Component {
             <html>
              <Head />
 
-                <body style={{backgroundColor: '#F7F7F5'}}>
+                <body style={{backgroundColor: '#F7F7F5', minHeight: '100vh'}}>
                     <div className="container-fluid" style={{ padding:'0'}}>
                     <NavbarLogged />
                         <main style={{  margin: '0 auto', fontFamily: 'Montserrat'}}>

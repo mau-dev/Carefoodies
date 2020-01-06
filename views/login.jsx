@@ -11,7 +11,7 @@ class Login extends React.Component {
             <Head />
             <div style={{fontFamily: 'Montserrat'}}>
                 <Navbar />
-                <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
+                <main style={{backgroundColor: '#F7F7F5', minHeight: '100vh'}}>
                       <div style={{backgroundColor: '#F7F7F5', width: '50vw', height: '100%', display: 'block', margin: '0', padding: '6% 0 0 6% ', float: 'left'}}>
                        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
   <div className="carousel-inner">

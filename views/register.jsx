@@ -44,10 +44,10 @@ class Register extends React.Component {
             <Head />
             <div style={{fontFamily: 'Montserrat'}}>
             <Navbar />
-                <main style={{backgroundColor: '#F7F7F5', height: '90vh'}}>
-                <div className="container">
-                <div classname="row">
-                     <div className="col-md-6 col-sm-12 col-12" style={{backgroundColor: '#F7F7F5', height: '100%', display: 'block', margin: '0',  float: 'left'}}>
+                <main style={{backgroundColor: '#F7F7F5', minHeight: '100vh'}}>
+                <div className="container reg-container d-flex">
+                <div className="row d-flex flex-wrap justify-content-around">
+                     <div className="float-left  d-flex reg-left col-md-6 col-sm-10 col-11" style={{backgroundColor: '#F7F7F5', height: '100%', display: 'block', margin: '0',  float: 'left'}}>
                        <div id="carouselExampleControls" className="carousel slide" data-ride="carousel">
   <div className="carousel-inner">
     <div className="carousel-item active">
@@ -73,7 +73,7 @@ class Register extends React.Component {
 
 </div>
                     </div>
-                    <div className=" col-md-6 col-sm-12 col-12" style={{backgroundColor: '#F7F7F5', height: '100%', display: 'block', margin: '0 ',  float: 'right'}}>
+                    <div className=" form-group reg-form  d-flex col-md-6 col-sm-10 col-11 " style={{backgroundColor: '#F7F7F5', height: '100%', display: 'block', margin: '0 ',  float: 'right'}}>
                         <RegisterForm /> {this.props.children}
                     </div>
                     </div>
