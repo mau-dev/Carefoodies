@@ -16,9 +16,9 @@ class Navbar extends React.Component {
                 </head>
                 <body>
                     <div className="container-fluid" style={{ padding:'0'}}>
-                        <nav className="navbar navbar-expand-lg " style={{ padding: '10px 50px', borderBottom: '1px solid #E3E3E1', backgroundColor: 'white',fontFamily: 'Montserrat'}}>
+                        <nav className="navbar navbar-expand-lg px-md-5 px-4 py-md-3 py-3" style={{ borderBottom: '1px solid #E3E3E1', backgroundColor: 'white',fontFamily: 'Montserrat'}}>
                             <span className="navbar-brand" style={{ color: '#CC46E0', fontWeight: 'bold'}}><a href="/"><img src="/images/carefoodies-logo.png" style={{ height: '30px', marginTop: '-13px'}}/></a></span>
-                                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                                <button className="navbar-toggler p-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                                 <img src="/images/menu.png" style={{ height: '24px'}}/>
                             </button>
 

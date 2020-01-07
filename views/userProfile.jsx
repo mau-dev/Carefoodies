@@ -17,7 +17,7 @@ class User extends React.Component {
             }
 
             return (
-                <div className="card col-xl-3 col-lg-3 col-md-5 col-sm-9 col-10  float-left" style={{ margin: '50px 1%', borderRadius: '10px'}}>
+                <div className="card col-xl-3 col-lg-3 col-md-5 col-sm-9 col-11  float-left" style={{ margin: '50px 1%', borderRadius: '10px'}}>
                <a href={"/posts/"+item.id}> <img height="300px" width="auto" src={item.img} href={"/posts/"+item.id} className="card-img-top" style={{  padding: '15px 0', objectFit: 'cover'}}/></a>
                 <div className="card-bodys" style={{  marginBottom: '20px'}}>
 
