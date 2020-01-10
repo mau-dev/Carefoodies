@@ -273,11 +273,33 @@ app.post('/posts',(request, response)=>{
     let { receiver_id, pending_request, settled_request, title, img, ingredients, area, address, content, expiry_date } = request.body;
     queryText = `INSERT INTO posts ( giver_id, posted_by, title, img, ingredients, area, address, content, expiry_date) VALUES ( '${giver_id}', '${postedBy}', '${title}', '${img}', '${ingredients}', '${area}', '${address}', '${content}', '${expiry_date}') RETURNING *`
 
+
+
+
+
     pool.query(queryText, (err,queryRes)=>{
 
+        console.log(err );
 
+
+         console.log(request.body );
+         console.log(giver_id );
+         console.log(postedBy );
+         console.log(title );
+         console.log(img );
+         console.log(ingredients);
+         console.log(area );
+         console.log(address );
+         console.log(content );
+         console.log(expiry_date);
+
+         console.log( err );
+
+       // console.log(rows );
 
         response.render('showNewPost', queryRes.rows[0]);
+
+
     });
 });
 
